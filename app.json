@@ -1,0 +1,18 @@
+{
+  "expo": {
+    "name": "TransitAI",
+    "slug": "transit-ai",
+    "version": "1.0.0",
+    "assetBundlePatterns": ["**/*"],
+    "platforms": ["ios", "android", "web"],
+    "android": {
+      "useNextNotificationApi": true,
+      "package": "com.transitai"
+    },
+    "plugins": [
+      ["expo-location", {}],
+      ["expo-camera", {}],
+      ["@react-native-camera-roll/camera-roll", {}]
+    ]
+  }
+}

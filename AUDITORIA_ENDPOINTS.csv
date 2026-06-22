@@ -1,0 +1,115 @@
+Num,Servicio,Archivo,Metodo,Endpoint,URL_Completa,DTOs_Entrada,Tipos_Respuesta,Parametros_Query,Parametros_Path,Requiere_Auth,Estado,Problemas,Prioridad
+1,auth.servicio,auth.servicio.ts,POST,/auth,POST /auth/login,BodyLogin,RespuestaAutenticacion,-,-,false,OK,-,BAJA
+2,auth.servicio,auth.servicio.ts,POST,/auth,POST /auth/register,BodyRegister,any,-,-,false,OK,Tipo respuesta vago,MEDIA
+3,auth.servicio,auth.servicio.ts,POST,/auth,POST /auth/logout,{},-,-,-,true,OK,-,BAJA
+4,auth.servicio,auth.servicio.ts,POST,/auth,POST /auth/google,BodyLoginGoogle,RespuestaAutenticacion,-,-,false,OK,-,BAJA
+5,auth.servicio,auth.servicio.ts,POST,/auth,POST /auth/refresh,BodyRefresh,{accessToken},refreshToken,-,true,OK,-,BAJA
+6,usuarios.servicio,usuarios.servicio.ts,GET,/usuarios,GET /usuarios,-,Usuario[],rol;sindicatoId;skip;take,-,true,OK,-,BAJA
+7,usuarios.servicio,usuarios.servicio.ts,GET,/usuarios,GET /usuarios/:id,-,Usuario,-,:id,true,OK,-,BAJA
+8,usuarios.servicio,usuarios.servicio.ts,POST,/usuarios,POST /usuarios,BodyCrearUsuario,Usuario,-,-,true,OK,-,BAJA
+9,usuarios.servicio,usuarios.servicio.ts,PATCH,/usuarios,PATCH /usuarios/:id,BodyActualizarUsuario,Usuario,-,:id,true,OK,-,BAJA
+10,usuarios.servicio,usuarios.servicio.ts,DELETE,/usuarios,DELETE /usuarios/:id,-,{mensaje},-,:id,true,OK,-,BAJA
+11,billetera.servicio,billetera.servicio.ts,GET,/billetera,GET /billetera,-,RespuestaBilletera,-,-,true,OK,-,BAJA
+12,billetera.servicio,billetera.servicio.ts,POST,/billetera,POST /billetera,-,RespuestaBilletera,-,-,true,OK,-,BAJA
+13,billetera.servicio,billetera.servicio.ts,POST,/billetera,POST /billetera/recargar,BodyRecargar,any,-,-,true,OK,Respuesta tipo any,MEDIA
+14,billetera.servicio,billetera.servicio.ts,POST,/billetera,POST /billetera/pagar,BodyPagar,RespuestaPago,-,-,true,OK,-,BAJA
+15,billetera.servicio,billetera.servicio.ts,GET,/billetera,GET /billetera/qr,-,RespuestaQr,-,-,true,OK,-,BAJA
+16,billetera.servicio,billetera.servicio.ts,POST,/billetera,POST /billetera/abono,BodyComprarAbono,any,-,-,true,OK,Respuesta tipo any,MEDIA
+17,billetera.servicio,billetera.servicio.ts,GET,/billetera,GET /billetera/abono,-,any,-,-,true,OK,Respuesta tipo any,MEDIA
+18,billetera.servicio,billetera.servicio.ts,GET,/billetera,GET /billetera/historial,-,Transaccion[],-,-,true,OK,-,BAJA
+19,billetera.servicio,billetera.servicio.ts,POST,/billetera,POST /billetera/stripe/checkout,BodyStripeCheckout,{url},monto,-,true,OK,-,BAJA
+20,billetera.servicio,billetera.servicio.ts,POST,/billetera,POST /billetera/stripe/confirmar,BodyStripeConfirmar,any,-,-,true,OK,Respuesta tipo any,MEDIA
+21,billetera.servicio,billetera.servicio.ts,GET,/billetera,GET /billetera/config,-,ConfigBilletera,-,-,true,OK,Solo admin,BAJA
+22,billetera.servicio,billetera.servicio.ts,PATCH,/billetera,PATCH /billetera/config/descuento,BodyActualizarDescuento,ConfigBilletera,-,-,true,OK,Solo admin,BAJA
+23,billetera.servicio,billetera.servicio.ts,PATCH,/billetera,PATCH /billetera/config/reparto,BodyActualizarReparto,ConfigBilletera,-,-,true,OK,Parámetros ambiguos (número sin unidad),ALTA
+24,billetera.servicio,billetera.servicio.ts,PATCH,/billetera,PATCH /billetera/config/abono,BodyActualizarAbono,ConfigBilletera,-,-,true,OK,Solo admin,BAJA
+25,billetera.servicio,billetera.servicio.ts,POST,/billetera,POST /billetera/:usuarioId/categoria,BodyAsignarCategoria,any,usuarioId,:usuarioId,true,OK,Respuesta tipo any,MEDIA
+26,billetera.servicio,billetera.servicio.ts,GET,/billetera,GET /billetera/transacciones,-,Transaccion[],tipo;usuarioId,-,true,OK,Solo admin,BAJA
+27,lineas.servicio,lineas.servicio.ts,GET,/lineas,GET /lineas,-,Linea[],sindicatoId;estado;skip;take,-,true,OK,-,BAJA
+28,lineas.servicio,lineas.servicio.ts,GET,/lineas,GET /lineas/:id,-,Linea,-,:id,true,OK,-,BAJA
+29,lineas.servicio,lineas.servicio.ts,POST,/lineas,POST /lineas,BodyCrearLinea,Linea,-,-,true,OK,Solo admin,BAJA
+30,lineas.servicio,lineas.servicio.ts,PATCH,/lineas,PATCH /lineas/:id,BodyActualizarLinea,Linea,-,:id,true,OK,Solo admin,BAJA
+31,lineas.servicio,lineas.servicio.ts,DELETE,/lineas,DELETE /lineas/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+32,lineas.servicio,lineas.servicio.ts,GET,/lineas,GET /lineas/:id/rutas,-,any[],-,:id,true,OK,Tipo respuesta genérico,MEDIA
+33,lineas.servicio,lineas.servicio.ts,GET,/lineas,GET /lineas/:id/conductores,-,any[],-,:id,true,OK,Tipo respuesta genérico,MEDIA
+34,conductores.servicio,conductores.servicio.ts,GET,/conductores,GET /conductores,-,Conductor[],sindicatoId;lineaId;estado;skip;take,-,true,OK,-,BAJA
+35,conductores.servicio,conductores.servicio.ts,GET,/conductores,GET /conductores/:id,-,Conductor,-,:id,true,OK,-,BAJA
+36,conductores.servicio,conductores.servicio.ts,POST,/conductores,POST /conductores,BodyCrearConductor,Conductor,-,-,true,OK,Solo admin,BAJA
+37,conductores.servicio,conductores.servicio.ts,PATCH,/conductores,PATCH /conductores/:id,BodyActualizarConductor,Conductor,-,:id,true,OK,Solo admin,BAJA
+38,conductores.servicio,conductores.servicio.ts,PATCH,/conductores,PATCH /conductores/:id/credencial,BodyActualizarCredencial,Conductor,-,:id,true,OK,Solo admin,BAJA
+39,conductores.servicio,conductores.servicio.ts,DELETE,/conductores,DELETE /conductores/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+40,rutas.servicio,rutas.servicio.ts,GET,/rutas,GET /rutas,-,Ruta[],lineaId;tipo;estado;skip;take,-,true,OK,-,BAJA
+41,rutas.servicio,rutas.servicio.ts,GET,/rutas,GET /rutas/:id,-,Ruta,-,:id,true,OK,-,BAJA
+42,rutas.servicio,rutas.servicio.ts,POST,/rutas,POST /rutas,BodyCrearRuta,Ruta,-,-,true,OK,Solo admin,BAJA
+43,rutas.servicio,rutas.servicio.ts,PATCH,/rutas,PATCH /rutas/:id,BodyActualizarRuta,Ruta,-,:id,true,OK,Solo admin,BAJA
+44,rutas.servicio,rutas.servicio.ts,DELETE,/rutas,DELETE /rutas/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+45,rutas.servicio,rutas.servicio.ts,GET,/rutas,GET /rutas/:id/paradas,-,Parada[],-,:id,true,OK,-,BAJA
+46,rutas.servicio,rutas.servicio.ts,GET,/rutas,GET /rutas/:id/horarios,-,any[],-,:id,true,OK,Tipo respuesta genérico,MEDIA
+47,sindicatos.servicio,sindicatos.servicio.ts,GET,/sindicatos,GET /sindicatos,-,Sindicato[],-,-,true,OK,-,BAJA
+48,sindicatos.servicio,sindicatos.servicio.ts,GET,/sindicatos,GET /sindicatos/:id,-,Sindicato,-,:id,true,OK,-,BAJA
+49,sindicatos.servicio,sindicatos.servicio.ts,POST,/sindicatos,POST /sindicatos,BodyCrearSindicato,Sindicato,-,-,true,OK,Solo admin,BAJA
+50,sindicatos.servicio,sindicatos.servicio.ts,PATCH,/sindicatos,PATCH /sindicatos/:id,BodyActualizarSindicato,Sindicato,-,:id,true,OK,Solo admin,BAJA
+51,sindicatos.servicio,sindicatos.servicio.ts,DELETE,/sindicatos,DELETE /sindicatos/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+52,sindicatos.servicio,sindicatos.servicio.ts,GET,/sindicatos,GET /sindicatos/:id/lineas,-,any[],-,:id,true,OK,Tipo respuesta genérico,MEDIA
+53,sindicatos.servicio,sindicatos.servicio.ts,GET,/sindicatos,GET /sindicatos/:id/conductores,-,any[],-,:id,true,OK,Tipo respuesta genérico,MEDIA
+54,sindicatos.servicio,sindicatos.servicio.ts,GET,/sindicatos,GET /sindicatos/:id/estadisticas,-,any,-,:id,true,OK,Tipo respuesta genérico; solo admin,MEDIA
+55,notificaciones.servicio,notificaciones.servicio.ts,GET,/notificaciones,GET /notificaciones,-,Notificacion[],usuarioDestinoId;tipo;leida;skip;take,-,true,OK,-,BAJA
+56,notificaciones.servicio,notificaciones.servicio.ts,GET,/notificaciones,GET /notificaciones/:id,-,Notificacion,-,:id,true,OK,-,BAJA
+57,notificaciones.servicio,notificaciones.servicio.ts,POST,/notificaciones,POST /notificaciones,BodyCrearNotificacion,Notificacion,-,-,true,OK,Solo admin,BAJA
+58,notificaciones.servicio,notificaciones.servicio.ts,PATCH,/notificaciones,PATCH /notificaciones/:id/leer,BodyMarcarLeida,Notificacion,-,:id,true,OK,DTO redundante (usuarioId en body cuando ya hay JWT),ALTA
+59,notificaciones.servicio,notificaciones.servicio.ts,DELETE,/notificaciones,DELETE /notificaciones/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+60,notificaciones.servicio,notificaciones.servicio.ts,GET,/notificaciones,GET /notificaciones/sin-leer,-,Notificacion[],-,-,true,OK,Ruta especial después de :id; mejor usar ?leida=false,MEDIA
+61,incidentes.servicio,incidentes.servicio.ts,GET,/incidentes,GET /incidentes,-,Incidente[],conductorId;viajeId;tipo;estado;severidad;skip;take,-,true,OK,-,BAJA
+62,incidentes.servicio,incidentes.servicio.ts,GET,/incidentes,GET /incidentes/:id,-,Incidente,-,:id,true,OK,-,BAJA
+63,incidentes.servicio,incidentes.servicio.ts,POST,/incidentes,POST /incidentes,BodyCrearIncidente,Incidente,-,-,true,OK,Requiere viajeId,MEDIA
+64,incidentes.servicio,incidentes.servicio.ts,PATCH,/incidentes,PATCH /incidentes/:id/revisar,BodyRevisarIncidente,Incidente,-,:id,true,OK,Parámetro redundante (revisadoPorId debe venir de JWT); Solo admin,ALTA
+65,incidentes.servicio,incidentes.servicio.ts,DELETE,/incidentes,DELETE /incidentes/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+66,incidentes.servicio,incidentes.servicio.ts,GET,/incidentes,GET /incidentes/conductor,conductorId,Incidente[],conductorId:query,-,true,OK,Ruta especial confusa; mejor GET /incidentes?conductorId=X,ALTA
+67,incidentes.servicio,incidentes.servicio.ts,GET,/incidentes,GET /incidentes/criticos,-,Incidente[],-,-,true,OK,Ruta especial; solo admin,MEDIA
+68,turnos.servicio,turnos.servicio.ts,GET,/turnos,GET /turnos,-,Turno[],-,-,true,OK,Sin parámetros de paginación,ALTA
+69,turnos.servicio,turnos.servicio.ts,GET,/turnos,GET /turnos/:id,-,Turno,-,:id,true,OK,-,BAJA
+70,turnos.servicio,turnos.servicio.ts,POST,/turnos,POST /turnos,BodyCrearTurno,Turno,-,-,true,OK,Solo admin,BAJA
+71,turnos.servicio,turnos.servicio.ts,PATCH,/turnos,PATCH /turnos/:id,BodyActualizarTurno,Turno,-,:id,true,OK,Solo admin,BAJA
+72,turnos.servicio,turnos.servicio.ts,DELETE,/turnos,DELETE /turnos/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+73,turnos.servicio,turnos.servicio.ts,GET,/turnos,GET /turnos/disponibles,-,Turno[],fecha:query,-,true,OK,Ruta especial confusa; mejor GET /turnos?disponibles=true&fecha=X,ALTA
+74,turnos.servicio,turnos.servicio.ts,GET,/turnos,GET /turnos/conductor,-,Turno[],conductorId:query,-,true,OK,Ruta especial confusa; mejor GET /turnos?conductorId=X,ALTA
+75,asignaciones.servicio,asignaciones.servicio.ts,GET,/asignaciones,GET /asignaciones,-,Asignacion[],sindicatoId;conductorId;fecha;estado;skip;take,-,true,OK,-,BAJA
+76,asignaciones.servicio,asignaciones.servicio.ts,GET,/asignaciones,GET /asignaciones/:id,-,Asignacion,-,:id,true,OK,-,BAJA
+77,asignaciones.servicio,asignaciones.servicio.ts,POST,/asignaciones,POST /asignaciones,BodyCrearAsignacion,Asignacion,-,-,true,OK,Solo admin,BAJA
+78,asignaciones.servicio,asignaciones.servicio.ts,PATCH,/asignaciones,PATCH /asignaciones/:id,BodyActualizarAsignacion,Asignacion,-,:id,true,OK,Solo admin,BAJA
+79,asignaciones.servicio,asignaciones.servicio.ts,DELETE,/asignaciones,DELETE /asignaciones/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+80,internos.servicio,internos.servicio.ts,GET,/internos,GET /internos,-,Interno[],sindicatoId;lineaId;activo,-,true,OK,-,BAJA
+81,internos.servicio,internos.servicio.ts,GET,/internos,GET /internos/:id,-,Interno,-,:id,true,OK,-,BAJA
+82,internos.servicio,internos.servicio.ts,POST,/internos,POST /internos,BodyCrearInterno,Interno,-,-,true,OK,Solo admin,BAJA
+83,internos.servicio,internos.servicio.ts,PATCH,/internos,PATCH /internos/:id,BodyActualizarInterno,Interno,-,:id,true,OK,Solo admin,BAJA
+84,internos.servicio,internos.servicio.ts,DELETE,/internos,DELETE /internos/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+85,desvios.servicio,desvios.servicio.ts,GET,/desvios,GET /desvios,-,Desvio[],viajeId;conductorId;justificado;estadoRevision;skip;take,-,true,OK,Requiere viajeId,MEDIA
+86,desvios.servicio,desvios.servicio.ts,GET,/desvios,GET /desvios/:id,-,Desvio,-,:id,true,OK,Requiere viajeId,MEDIA
+87,desvios.servicio,desvios.servicio.ts,PATCH,/desvios,PATCH /desvios/:id/justificar,BodyJustificarDesvio,Desvio,-,:id,true,OK,Parámetro redundante (revisadoPorId); Solo admin,ALTA
+88,desvios.servicio,desvios.servicio.ts,GET,/desvios,GET /desvios/conductor,-,Desvio[],conductorId:query,-,true,OK,Ruta especial confusa; mejor GET /desvios?conductorId=X,ALTA
+89,desvios.servicio,desvios.servicio.ts,GET,/desvios,GET /desvios/pendientes,-,Desvio[],-,-,true,OK,Ruta especial; solo admin,MEDIA
+90,trasbordos.servicio,trasbordos.servicio.ts,GET,/trasbordos,GET /trasbordos,-,Trasbordo[],pasajeroId;viajeId;estado;skip;take,-,true,OK,Requiere viajeId,MEDIA
+91,trasbordos.servicio,trasbordos.servicio.ts,GET,/trasbordos,GET /trasbordos/:id,-,Trasbordo,-,:id,true,OK,Requiere viajeId,MEDIA
+92,trasbordos.servicio,trasbordos.servicio.ts,PATCH,/trasbordos,PATCH /trasbordos/:id/decidir,BodyDecidirTrasbordo,Trasbordo,-,:id,true,OK,Parámetro redundante (decididoPorId); Solo admin,ALTA
+93,trasbordos.servicio,trasbordos.servicio.ts,DELETE,/trasbordos,DELETE /trasbordos/:id,-,{mensaje},-,:id,true,OK,Solo admin,BAJA
+94,trasbordos.servicio,trasbordos.servicio.ts,GET,/trasbordos,GET /trasbordos/pendientes,-,Trasbordo[],-,-,true,OK,Ruta especial; solo admin,MEDIA
+95,buses.servicio,buses.servicio.ts,GET,/buses,GET /buses,-,Bus[],-,-,true,OK,Sin parámetros de filtro/paginación,ALTA
+96,buses.servicio,buses.servicio.ts,GET,/buses,GET /buses/:id,-,Bus,-,:id,true,OK,-,BAJA
+97,buses.servicio,buses.servicio.ts,POST,/buses,POST /buses,BodyCrearBus,Bus,-,-,true,OK,Solo admin,BAJA
+98,buses.servicio,buses.servicio.ts,PATCH,/buses,PATCH /buses/:id,BodyActualizarBus,Bus,-,:id,true,OK,Solo admin,BAJA
+99,buses.servicio,buses.servicio.ts,GET,/buses,GET /buses/linea,lineaId,Bus[],lineaId:query,-,true,OK,Ruta especial confusa; mejor GET /buses?lineaId=X,ALTA
+100,buses.servicio,buses.servicio.ts,GET,/buses,GET /buses/disponibles,-,Bus[],-,-,true,OK,Ruta especial,MEDIA
+101,grabaciones.servicio,grabaciones.servicio.ts,GET,/grabaciones,GET /grabaciones,-,Grabacion[],lineaId;busId;estado;revisada;skip;take,-,true,OK,-,BAJA
+102,grabaciones.servicio,grabaciones.servicio.ts,GET,/grabaciones,GET /grabaciones/:id,-,Grabacion,-,:id,true,OK,Requiere viajeId,MEDIA
+103,grabaciones.servicio,grabaciones.servicio.ts,POST,/grabaciones,POST /grabaciones,BodyCrearGrabacion,Grabacion,-,-,true,OK,Requiere viajeId,MEDIA
+104,grabaciones.servicio,grabaciones.servicio.ts,PATCH,/grabaciones,PATCH /grabaciones/:id/revisar,BodyRevisarGrabacion,Grabacion,-,:id,true,OK,Solo admin,BAJA
+105,grabaciones.servicio,grabaciones.servicio.ts,GET,/grabaciones,GET /grabaciones/sin-revisar,-,Grabacion[],-,-,true,OK,Ruta especial; solo admin,MEDIA
+106,grabaciones.servicio,grabaciones.servicio.ts,GET,/grabaciones,GET /grabaciones/:id/url-reproduccion,-,{url},-,:id,true,OK,-,BAJA
+107,planificador.servicio,planificador.servicio.ts,POST,/planificador,POST /planificador/calcular,BodyCalcularRuta,OpcionRuta[],-,-,true,OK,-,BAJA
+108,ia.servicio,ia.servicio.ts,GET,/ia,GET /ia/eta/viaje/:id,{lat;lng},ResultadoETA,lat;lng:query,:viajeId,true,OK,-,BAJA
+109,ia.servicio,ia.servicio.ts,GET,/ia,GET /ia/eta/linea/:id,{lat;lng},ResultadoETA,lat;lng:query,:lineaId,true,OK,-,BAJA
+110,ia.servicio,ia.servicio.ts,GET,/ia,GET /ia/congestion,-,ResultadoCongestion,lat;lng;radio:query,-,true,OK,-,BAJA
+111,ia.servicio,ia.servicio.ts,GET,/ia,GET /ia/congestion/zonas,-,ZonaCongestion[],-,-,true,OK,-,BAJA
+112,ia.servicio,ia.servicio.ts,GET,/ia,GET /ia/preferencias/:id,-,Preferencias,-,:usuarioId,true,OK,-,BAJA
+113,ia.servicio,ia.servicio.ts,PATCH,/ia,PATCH /ia/preferencias/:id,{criterio;maxCaminata;maxTransbordos},-,-,:usuarioId,true,OK,-,BAJA
+114,ia.servicio,ia.servicio.ts,POST,/ia,POST /ia/preferencias/:id/uso,{criterio},{criterioPrincipalAprendido},-,:usuarioId,true,OK,-,BAJA
