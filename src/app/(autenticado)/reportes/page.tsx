@@ -231,7 +231,7 @@ export default function PaginaReportes() {
               transition: 'all 0.2s',
             }}
           >
-            📊 Operacionales
+            Operacionales
           </button>
           <button
             onClick={() => setPestaña('dinamicos')}
@@ -246,7 +246,7 @@ export default function PaginaReportes() {
               transition: 'all 0.2s',
             }}
           >
-            🎤 Dinámicos
+            Dinámicos
           </button>
         </div>
       </div>
@@ -403,220 +403,162 @@ export default function PaginaReportes() {
         </>
       )}
 
-      {/* VISTA: REPORTES DINÁMICOS */}
+      {/* VISTA: REPORTES DINÁMICOS - Interfaz simplificada */}
       {pestaña === 'dinamicos' && (
-        <div style={{ maxWidth: '700px' }}>
-          {/* Formulario */}
+        <div style={{ maxWidth: '800px' }}>
+          {/* Formulario de reporte - Minimalista */}
           <div
             style={{
               background: '#101010',
               border: '1px solid #3d3a39',
               borderRadius: '8px',
-              padding: '2rem',
+              padding: '1.5rem',
               marginBottom: '2rem',
             }}
           >
-            {/* Tipo de reporte */}
-            <div style={{ marginBottom: '1.5rem' }}>
-              <label style={{ color: '#e0e0e0', display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>
-                Tipo de Reporte
-              </label>
-              <select
-                value={formReporte.report_type}
-                onChange={(e) =>
-                  setFormReporte({ ...formReporte, report_type: e.target.value as TipoReporteDinamico })
-                }
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  backgroundColor: '#050507',
-                  border: '1px solid #3d3a39',
-                  color: '#f2f2f2',
-                  borderRadius: '4px',
-                }}
-              >
-                <option value={TipoReporteDinamico.INCIDENT}>🚨 Incidente</option>
-                <option value={TipoReporteDinamico.ANOMALY}>⚠️ Anomalía</option>
-                <option value={TipoReporteDinamico.MAINTENANCE}>🔧 Mantenimiento</option>
-                <option value={TipoReporteDinamico.TRAFFIC}>🚦 Tráfico</option>
-                <option value={TipoReporteDinamico.DELAY}>⏱️ Retraso</option>
-                <option value={TipoReporteDinamico.GENERAL}>📝 General</option>
-              </select>
-            </div>
+            {/* Título del formulario */}
+            <h2 style={{ fontWeight: 700, fontSize: '1rem', color: '#f2f2f2', marginBottom: '1rem' }}>
+              Crear nuevo reporte
+            </h2>
 
-            {/* Título */}
-            <div style={{ marginBottom: '1.5rem' }}>
-              <label style={{ color: '#e0e0e0', display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>
-                Título *
-              </label>
-              <input
-                type="text"
-                placeholder="Ej: Problema en el motor"
-                value={formReporte.title}
-                onChange={(e) => setFormReporte({ ...formReporte, title: e.target.value })}
-                disabled={isRecording}
-                style={{
-                  width: '100%',
-                  padding: '0.75rem',
-                  backgroundColor: '#050507',
-                  border: '1px solid #3d3a39',
-                  color: '#f2f2f2',
-                  borderRadius: '4px',
-                  opacity: isRecording ? 0.5 : 1,
-                }}
-              />
-            </div>
+            {/* Tipo de reporte (oculto pero funcional) */}
+            <input
+              type="hidden"
+              value={formReporte.report_type}
+            />
 
-            {/* Descripción */}
-            <div style={{ marginBottom: '1.5rem' }}>
-              <label style={{ color: '#e0e0e0', display: 'block', marginBottom: '0.5rem', fontWeight: 600 }}>
-                Descripción {recordedAudio ? '(Opcional)' : ''}
-              </label>
-              <textarea
-                placeholder="Describe el problema o situación..."
-                value={formReporte.description}
-                onChange={(e) => setFormReporte({ ...formReporte, description: e.target.value })}
-                disabled={isRecording}
-                style={{
-                  width: '100%',
-                  minHeight: '100px',
-                  padding: '0.75rem',
-                  backgroundColor: '#050507',
-                  border: '1px solid #3d3a39',
-                  color: '#f2f2f2',
-                  borderRadius: '4px',
-                  fontFamily: 'monospace',
-                  fontSize: '0.875rem',
-                  opacity: isRecording ? 0.5 : 1,
-                }}
-              />
-            </div>
-
-            {/* Grabación de voz */}
-            <div
-              style={{
-                marginBottom: '1.5rem',
-                padding: '1rem',
-                backgroundColor: '#050507',
-                borderRadius: '8px',
-                border: isRecording ? '2px solid #00d992' : '1px solid #3d3a39',
-              }}
-            >
-              <p style={{ color: '#8b949e', marginBottom: '1rem', fontSize: '0.875rem' }}>
-                O graba un reporte por voz:
-              </p>
-
-              {isRecording && (
-                <div style={{ marginBottom: '1rem', color: '#ff4444', fontWeight: 600 }}>
-                  🔴 Grabando: {formatearTiempo(recordingTime)}
-                </div>
-              )}
-
-              {hasAudio && (
-                <div style={{ marginBottom: '1rem', color: '#00d992', fontWeight: 600 }}>
-                  ✓ Audio grabado: {formatearTiempo(recordingTime)}
-                </div>
-              )}
-
-              <div style={{ display: 'flex', gap: '0.5rem' }}>
-                {!isRecording ? (
-                  <button
-                    onClick={iniciarGrabacion}
-                    disabled={createReporteMutation.isPending}
-                    style={{
-                      flex: 1,
-                      padding: '0.75rem',
-                      backgroundColor: '#00d992',
-                      color: '#0f0f0f',
-                      border: 'none',
-                      borderRadius: '4px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.5rem',
-                    }}
-                  >
-                    <Mic size={16} /> Grabar
-                  </button>
-                ) : (
-                  <button
-                    onClick={detenerGrabacion}
-                    style={{
-                      flex: 1,
-                      padding: '0.75rem',
-                      backgroundColor: '#ff4444',
-                      color: '#f2f2f2',
-                      border: 'none',
-                      borderRadius: '4px',
-                      fontWeight: 600,
-                      cursor: 'pointer',
-                      display: 'flex',
-                      alignItems: 'center',
-                      justifyContent: 'center',
-                      gap: '0.5rem',
-                    }}
-                  >
-                    ⏹ Detener
-                  </button>
-                )}
-              </div>
-            </div>
-
-            {/* Botón enviar */}
-            <button
-              onClick={enviarReporte}
-              disabled={
-                createReporteMutation.isPending ||
-                !formReporte.title ||
-                (!formReporte.description && !recordedAudio)
-              }
+            {/* Campo de texto único para título + descripción */}
+            <textarea
+              placeholder="Describe el problema o situación en detalle..."
+              value={formReporte.description}
+              onChange={(e) => setFormReporte({ ...formReporte, description: e.target.value })}
+              disabled={isRecording}
               style={{
                 width: '100%',
-                padding: '0.875rem',
-                backgroundColor:
-                  !formReporte.title || (!formReporte.description && !recordedAudio)
-                    ? '#666'
-                    : '#00d992',
-                color:
-                  !formReporte.title || (!formReporte.description && !recordedAudio)
-                    ? '#999'
-                    : '#0f0f0f',
-                border: 'none',
+                minHeight: '120px',
+                padding: '1rem',
+                backgroundColor: '#050507',
+                border: '1px solid #3d3a39',
+                color: '#f2f2f2',
                 borderRadius: '4px',
-                fontWeight: 700,
-                cursor: 'pointer',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                gap: '0.5rem',
-                fontSize: '0.9rem',
+                fontFamily: 'monospace',
+                fontSize: '0.875rem',
+                opacity: isRecording ? 0.5 : 1,
+                resize: 'vertical',
+                marginBottom: '1rem',
               }}
-            >
-              <Send size={16} /> {createReporteMutation.isPending ? 'Enviando...' : 'Enviar Reporte'}
-            </button>
+            />
+
+            {/* Controles de voz y envío */}
+            <div style={{ display: 'flex', gap: '0.75rem', alignItems: 'center' }}>
+              {/* Botón grabar/detener */}
+              {!isRecording ? (
+                <button
+                  onClick={iniciarGrabacion}
+                  disabled={createReporteMutation.isPending}
+                  style={{
+                    flex: 1,
+                    padding: '0.75rem 1rem',
+                    backgroundColor: '#00d992',
+                    color: '#0f0f0f',
+                    border: 'none',
+                    borderRadius: '4px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    fontSize: '0.9rem',
+                  }}
+                >
+                  <Mic size={16} /> Grabar
+                </button>
+              ) : (
+                <button
+                  onClick={detenerGrabacion}
+                  style={{
+                    flex: 1,
+                    padding: '0.75rem 1rem',
+                    backgroundColor: '#ff4444',
+                    color: '#f2f2f2',
+                    border: 'none',
+                    borderRadius: '4px',
+                    fontWeight: 600,
+                    cursor: 'pointer',
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center',
+                    gap: '0.5rem',
+                    fontSize: '0.9rem',
+                  }}
+                >
+                  Detener {formatearTiempo(recordingTime)}
+                </button>
+              )}
+
+              {/* Botón enviar */}
+              <button
+                onClick={enviarReporte}
+                disabled={
+                  createReporteMutation.isPending ||
+                  (!formReporte.description && !recordedAudio)
+                }
+                style={{
+                  flex: 1,
+                  padding: '0.75rem 1rem',
+                  backgroundColor:
+                    !formReporte.description && !recordedAudio
+                      ? '#666'
+                      : '#00d992',
+                  color:
+                    !formReporte.description && !recordedAudio
+                      ? '#999'
+                      : '#0f0f0f',
+                  border: 'none',
+                  borderRadius: '4px',
+                  fontWeight: 700,
+                  cursor: 'pointer',
+                  display: 'flex',
+                  alignItems: 'center',
+                  justifyContent: 'center',
+                  gap: '0.5rem',
+                  fontSize: '0.9rem',
+                }}
+              >
+                <Send size={16} /> {createReporteMutation.isPending ? 'Enviando...' : 'Enviar'}
+              </button>
+            </div>
+
+            {/* Indicador de audio grabado */}
+            {hasAudio && (
+              <div style={{ marginTop: '1rem', padding: '0.75rem', backgroundColor: '#1a3d2a', border: '1px solid #00d992', borderRadius: '4px' }}>
+                <p style={{ color: '#00d992', fontWeight: 600, margin: 0 }}>
+                  Audio grabado ({formatearTiempo(recordingTime)})
+                </p>
+              </div>
+            )}
           </div>
 
-          {/* Info */}
-          <div
-            style={{
-              padding: '1rem',
-              backgroundColor: '#1a2a4a',
-              border: '1px solid #4cb3d4',
-              borderRadius: '8px',
-              color: '#8b949e',
-              fontSize: '0.875rem',
-            }}
-          >
-            <p>
-              <strong>💡 El sistema analizará automáticamente:</strong>
-            </p>
-            <ul style={{ marginLeft: '1.5rem', marginTop: '0.5rem' }}>
-              <li>Transcripción de audio (si lo grabas)</li>
-              <li>Severidad automática del problema</li>
-              <li>Palabras clave importantes</li>
-            </ul>
+          {/* Lista de reportes generados */}
+          <div>
+            <h2 style={{ fontWeight: 700, fontSize: '1rem', color: '#f2f2f2', marginBottom: '1rem' }}>
+              Reportes Generados
+            </h2>
+
+            <div style={{ display: 'grid', gap: '1rem' }}>
+              {/* Placeholder - Los reportes se cargarían desde la query */}
+              <div style={{
+                background: '#101010',
+                border: '1px solid #3d3a39',
+                borderRadius: '8px',
+                padding: '1rem',
+                textAlign: 'center',
+                color: '#8b949e',
+              }}>
+                <p>No hay reportes generados aún</p>
+              </div>
+            </div>
           </div>
         </div>
       )}
