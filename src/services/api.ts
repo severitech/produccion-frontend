@@ -10,7 +10,7 @@
 
 import axios, { AxiosError, AxiosResponse } from 'axios';
 
-const API_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const API_URL = process.env.NEXT_PUBLIC_API_URL || 'https://d24b2ge9tptla9.cloudfront.net';
 
 /**
  * Instancia singleton de Axios
