@@ -24,7 +24,7 @@ export default function PaginaNotificaciones() {
   const marcarLeida = useMutation({ mutationFn:(id:string)=>notificacionesServicio.marcarLeida(id, String(usuario?.id||1)), onSuccess:()=>qc.invalidateQueries({queryKey:['notificaciones']}) });
 
   useEffect(()=>{
-    const ws = io(process.env.NEXT_PUBLIC_WS_URL||'http://localhost:4000', { path:'/notificaciones' });
+    const ws = io(process.env.NEXT_PUBLIC_WS_URL||'https://d24b2ge9tptla9.cloudfront.net/', { path:'/notificaciones' });
     if (usuario?.id) ws.emit('suscribir-usuario',{usuarioId:usuario.id});
     ws.on('nueva-notificacion',(n)=>{ setVivos(prev=>[n,...prev.slice(0,4)]); setTimeout(()=>setVivos(prev=>prev.filter(x=>x.id!==n.id)),6000); });
     return ()=>{ ws.disconnect(); };

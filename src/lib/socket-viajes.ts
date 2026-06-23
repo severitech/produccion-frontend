@@ -1,6 +1,6 @@
 import { io, Socket } from 'socket.io-client';
 
-const WS_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000';
+const WS_URL = process.env.NEXT_PUBLIC_API_URL || 'https://d24b2ge9tptla9.cloudfront.net/';
 
 let socketViajes: Socket | null = null;
 

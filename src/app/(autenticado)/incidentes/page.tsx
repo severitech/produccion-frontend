@@ -26,7 +26,7 @@ export default function PaginaIncidentes() {
   const eliminar = useMutation({ mutationFn:(id:string)=>incidentesServicio.eliminar(id), onSuccess:()=>qc.invalidateQueries({queryKey:['incidentes']}) });
 
   useEffect(()=>{
-    const ws = io(process.env.NEXT_PUBLIC_WS_URL||'http://localhost:4000', { path:'/incidentes' });
+    const ws = io(process.env.NEXT_PUBLIC_WS_URL||'https://d24b2ge9tptla9.cloudfront.net/', { path:'/incidentes' });
     ws.on('nuevo-incidente', ()=>qc.invalidateQueries({queryKey:['incidentes']}));
     return ()=>{ ws.disconnect(); };
   },[qc]);
